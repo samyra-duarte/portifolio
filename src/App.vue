@@ -107,7 +107,7 @@
           <img 
             :src="imagemFocada" 
             class="modal-img-grande" 
-            :style="{ transform: `scale(${escalaZoom})` }"
+            :style="{ width: `${50 * escalaZoom}vw`, height: `${45 * escalaZoom}vh` }"
             alt="Arte em destaque" 
           />
         </div>
@@ -182,12 +182,14 @@ const escalaZoom = ref(1)
 
 const abrirModal = (caminhoImg) => {
   imagemFocada.value = caminhoImg
-  escalaZoom.value = 2 
+  escalaZoom.value = 2
+  document.body.style.overflow = 'hidden'
 }
 
 const fecharModal = () => {
   imagemFocada.value = null
   escalaZoom.value = 1
+  document.body.style.overflow = ''
 }
 
 const alterarZoom = (fator) => {
@@ -522,7 +524,7 @@ const resetarZoom = () => {
 }
 
 .mock-imagem {
-  background-color: var(--verde-sombra);
+  background-color: var(--bg-creme);
   border: 4px solid var(--borda-marrom);
   aspect-ratio: 1 / 1;
   position: relative;
@@ -534,7 +536,7 @@ const resetarZoom = () => {
 
 .image-overlay {
   position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(43, 24, 23, 0.2);
+  background: rgba(24, 24, 24, 0.1);
   transition: opacity 0.2s;
   z-index: 1;
 }
@@ -561,7 +563,7 @@ const resetarZoom = () => {
 /* ================== MODAL LIGHTBOX ================== */
 .modal-backdrop {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(23, 36, 26, 0.95); 
+  background-color: rgba(23, 23, 23, 0.95); 
   display: flex; align-items: center; justify-content: center; 
   z-index: 1000; 
   backdrop-filter: blur(4px);
@@ -572,15 +574,14 @@ const resetarZoom = () => {
 
 .modal-image-container {
   width: 100vw; height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; 
+  display: flex; 
+  overflow: auto; 
 }
 
 .modal-img-grande {
-  max-width: 90vw; max-height: 85vh; 
+  margin: auto; 
   object-fit: contain; 
-  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-  transform-origin: center center;
+  transition: width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
   image-rendering: pixelated; 
   filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.5));
 }
@@ -640,6 +641,31 @@ const resetarZoom = () => {
 
 .fechar-btn:hover { background: var(--sakura-mid); transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--borda-marrom); }
 .fechar-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px var(--borda-marrom); }
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-creme);
+  border-left: 3px solid var(--borda-marrom);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--verde-musgo);
+  border: 3px solid var(--borda-marrom);
+  border-radius: 0; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sakura-shadow);
+}
+
+.modal-image-container::-webkit-scrollbar-track {
+  background: rgba(23, 23, 23, 0.8);
+  border-left: none;
+}
 
 /* ================== RESPONSIVO (MOBILE) ================== */
 @media (max-width: 768px) {
