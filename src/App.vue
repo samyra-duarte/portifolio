@@ -147,14 +147,14 @@ const secoes = ref([
         descricao: 'Plataforma 2D de ação com um cogumelo simbiótico tentando sobreviver e navegar por um mundo dominado por máquinas e engrenagens.',
         linkJogar: 'https://spinoshroom.itch.io/cogutesla',
         imagens: [
-        '/cogutesla/cogutesla1.png',
-        '/cogutesla/cogutesla2.png',  
-        '/cogutesla/cogutesla3.png',
-        '/cogutesla/cogutesla4.png',
-        '/cogutesla/cogutesla5.png',
-        '/cogutesla/cogutesla6.png',
-        '/cogutesla/cogutesla7.png',
-        '/cogutesla/cogutesla8.png',
+        'cogutesla/cogutesla1.png',
+        'cogutesla/cogutesla2.png',  
+        'cogutesla/cogutesla3.png',
+        'cogutesla/cogutesla4.png',
+        'cogutesla/cogutesla5.png',
+        'cogutesla/cogutesla6.png',
+        'cogutesla/cogutesla7.png',
+        'cogutesla/cogutesla8.png',
         ]
       }
     ]
