@@ -52,7 +52,7 @@
                 <p class="pixel-text-sm">{{ sub.descricao }}</p>
               </div>
               
-              <div class="cartridge-action" v-if="sub.linkJogar">
+              <div class="cartridge-action" v-if="mostrarBotaoJogar(sub.linkJogar)">
                 <a :href="sub.linkJogar" target="_blank" class="pixel-btn btn-jogar">
                   <span class="btn-icon">▶</span> JOGAR
                 </a>
@@ -226,6 +226,12 @@ const alterarZoom = (fator) => {
 
 const resetarZoom = () => {
   escalaZoom.value = 1
+}
+
+function mostrarBotaoJogar(link){
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+  return !isMobile && (link != null || link != "");
 }
 </script>
 
