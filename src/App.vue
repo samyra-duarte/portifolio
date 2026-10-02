@@ -168,8 +168,34 @@ const secoes = ref([
       'personagens/personagem_jogavel_2c.gif',
       'personagens/personagem_jogavel_4c.gif',
       'personagens/bolha_brilhante.gif',
+      'personagens/bolha_gotica.gif',
     ]
   },
+  {
+    id: 'ambientes-isaac',
+    titulo: 'CENÁRIOS & TILESETS',
+    tipo: 'com_subsecoes',
+    subsecoes: [
+      {
+        id: 'basement-isaac-fan-game',
+        titulo: 'Subsolo (The Binding of Isaac)',
+        descricao: 'Tileset 16x16 inspirada em The Binding of Isaac. Inclui autotile de parede, variações de piso com rachaduras/manchas, pedras e portas com tranca e abertas.',
+        imagens: [
+          'ambientes/isaac/0.png',  // 1º: A sala montada em jogo
+          'ambientes/isaac/1.png',  // 1º: A sala montada em jogo
+          'ambientes/isaac/5.png',  // 1º: A sala montada em jogo
+          'ambientes/isaac/2.png',  // 1º: A sala montada em jogo
+          'ambientes/isaac/3.png',  // 1º: A sala montada em jogo
+          'ambientes/isaac/4.png',  // 1º: A sala montada em jogo
+          'ambientes/isaac/6.png',  // 1º: A sala montada em jogo
+          // 'ambientes/isaac/isaac_mapa_azul.png',  // 1º: A sala montada em jogo
+          // 'ambientes/isaac/isaac_mapa_biblioteca.png',   // 2º: A folha de tiles técnica
+          'ambientes/isaac/isaac_mapa_marrom.png',    // 3º: Pedras quebrando / animação
+          // 'ambientes/isaac/isaac_mapa_vermelho.png'   // 4º: Detalhes e texturas
+        ]
+      },
+    ]
+  }
 ])
 
 // Lógica de Efeitos
