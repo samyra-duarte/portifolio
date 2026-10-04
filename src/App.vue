@@ -231,7 +231,7 @@ const resetarZoom = () => {
 function mostrarBotaoJogar(link){
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-  return !isMobile && (link != null || link != "");
+  return !isMobile && !(link == null || link == "" || link == undefined);
 }
 </script>
 
