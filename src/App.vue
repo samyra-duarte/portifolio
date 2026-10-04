@@ -103,12 +103,22 @@
         </div>
 
         <!-- Container da imagem -->
-        <div class="modal-image-container" @click.stop>
+        <div 
+          class="modal-image-container" 
+          ref="imageContainer"
+          :class="{ 'is-dragging': isDragging }"
+          @mousedown.prevent="iniciarArraste" 
+          @mousemove="arrastar"
+          @mouseup="pararArraste"
+          @mouseleave="pararArraste"
+          @click.stop
+        >
           <img 
             :src="imagemFocada" 
             class="modal-img-grande" 
             :style="{ width: `${50 * escalaZoom}vw`, height: `${45 * escalaZoom}vh` }"
             alt="Arte em destaque" 
+            draggable="false" 
           />
         </div>
         
@@ -119,6 +129,40 @@
 
 <script setup>
 import { ref } from 'vue'
+
+const imageContainer = ref(null);
+
+const isDragging = ref(false);
+let startX = 0;
+let startY = 0;
+let initialScrollLeft = 0;
+let initialScrollTop = 0;
+
+const iniciarArraste = (e) => {
+  isDragging.value = true;
+  // Captura a posição inicial do clique em relação ao documento
+  startX = e.pageX - imageContainer.value.offsetLeft;
+  startY = e.pageY - imageContainer.value.offsetTop;
+  // Captura a posição atual do scroll
+  initialScrollLeft = imageContainer.value.scrollLeft;
+  initialScrollTop = imageContainer.value.scrollTop;
+};
+// Executa a rolagem enquanto o mouse se move
+const arrastar = (e) => {
+  if (!isDragging.value) return;
+  e.preventDefault();
+  const x = e.pageX - imageContainer.value.offsetLeft;
+  const y = e.pageY - imageContainer.value.offsetTop;
+  const walkX = x - startX;
+  const walkY = y - startY;
+  imageContainer.value.scrollLeft = initialScrollLeft - walkX;
+  imageContainer.value.scrollTop = initialScrollTop - walkY;
+};
+// Para o arrasto quando o usuário solta o botão ou tira o mouse da área
+const pararArraste = () => {
+  isDragging.value = false;
+};
+
 
 const persona = {
   nome: 'Samyra PixelArt',
@@ -606,7 +650,18 @@ function mostrarBotaoJogar(link){
 .modal-image-container {
   width: 100vw; height: 100vh;
   display: flex; 
-  overflow: auto; 
+  overflow: auto;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.modal-image-container.is-dragging {
+  cursor: grabbing;
+}
+
+.modal-image-container.is-dragging .modal-img-grande {
+  transition: none; 
 }
 
 .modal-img-grande {
@@ -615,6 +670,9 @@ function mostrarBotaoJogar(link){
   transition: width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
   image-rendering: pixelated; 
   filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.5));
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .zoom-controls {
